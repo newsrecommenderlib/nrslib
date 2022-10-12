@@ -1,0 +1,35 @@
+# @package _global_
+
+# specify model name here for MKR, RippleNet (needed for datamodule distinction)
+model_name: RippleNet #MKR
+
+# specify here default evaluation configuration
+defaults:
+  - _self_
+  - datamodule: mind_RippleNet_MKR.yaml # choose the datamodule for evaluation
+  - model: RippleNet.yaml
+  - callbacks: default.yaml
+  - logger: tensorboard
+  - trainer: default.yaml
+  - log_dir: evaluation.yaml
+
+  - experiment: null
+
+  # enable color logging
+  - override hydra/hydra_logging: colorlog
+  - override hydra/job_logging: colorlog
+
+original_work_dir: ${hydra:runtime.cwd}
+
+data_dir: ${original_work_dir}/data/
+
+print_config: True
+
+ignore_warnings: True
+
+seed: null
+
+name: "default"
+
+# passing checkpoint path is necessary
+ckpt_path: ${original_work_dir}/checkpoints/RippleNet_epoch_009.ckpt

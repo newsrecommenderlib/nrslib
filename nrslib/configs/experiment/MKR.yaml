@@ -1,0 +1,35 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+defaults:
+  - override /datamodule: mind.yaml
+  - override /model: MKR.yaml
+  - override /callbacks: test.yaml
+  - override /logger: tensorboard
+  - override /trainer: default.yaml
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+# name of the run determines folder name in logs
+name: "MKR"
+
+
+datamodule:
+  _target_: nrslib.src.datamodules.mind.datamodule_MKR.MINDDataModuleMKR
+  batch_size: 128
+  use_categories: True
+  use_subcategories: True
+  use_title_entities: True
+  use_abstract_entities: True
+  use_title_tokens: True
+  use_wikidata: False
+
+logger:
+  wandb:
+    tags: "${name}"
+  tensorboard:
+    name: "${name}"
+    version: "${now: %Y-%m-%d_%H%M%S}"

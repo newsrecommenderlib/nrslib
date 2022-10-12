@@ -1,0 +1,92 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "nrslib"
+description = 'Standardised Library for the Benchmarking of News Recommenders Systems'
+readme = "README.md"
+requires-python = ">=3.7"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Ahmed Elzamarany", email = "" },
+  { name = "Nadine Maeser", email = "" },
+  { name = "Noel Chia", email = "" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "torch>=1.10.0",
+  "torchvision>=0.11.0",
+  "pytorch-lightning>=1.5.10",
+  "torchmetrics>=0.7.0",
+  "hydra-core>=1.1.0",
+  "hydra-colorlog>=1.1.0",
+  "hydra-optuna-sweeper>=1.1.0",
+  "tensorboard",
+  "pre-commit",
+  "black",
+  "isort",
+  "flake8",
+  "nbstripout",
+  "python-dotenv",
+  "rich",
+  "pytest",
+  "pudb",
+  'nltk',
+  'retrying',
+  'pandas',
+  'swifter',
+  'scikit-learn'
+  ]
+dynamic = ["version"]
+
+[project.urls]
+Documentation = "https://newsrecommenderlib.github.io/"
+Issues = "https://github.com/newsrecommenderlib/nrslib/issues"
+Source = "https://github.com/newsrecommenderlib/nrslib"
+
+[tool.hatch.version]
+path = "nrslib/__about__.py"
+
+[tool.hatch.envs.default]
+dependencies = [
+  "pytest",
+  "pytest-cov",
+]
+[tool.hatch.envs.default.scripts]
+cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=nrslib --cov=tests"
+no-cov = "cov --no-cov"
+
+[[tool.hatch.envs.test.matrix]]
+python = ["37", "38", "39", "310", "311"]
+
+[tool.coverage.run]
+branch = true
+parallel = true
+omit = [
+  "nrslib/__about__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.hatch.build]
+exclude = [
+  "data/*",
+  "nrslib/docs"
+]

@@ -1,0 +1,27 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+defaults:
+  - override /datamodule: mind.yaml
+  - override /model: collaborativeFiltering.yaml
+  - override /callbacks: test.yaml
+  - override /logger: tensorboard
+  - override /trainer: default.yaml
+
+
+name: "Collaborative"
+
+
+datamodule:
+  _target_: nrslib.src.datamodules.mind.datamodule_CollaborativeFiltering.MINDDataModuleCollaborativeFiltering
+  batch_size: 64
+  num_workers: 1
+
+logger:
+  wandb:
+    tags: "${name}"
+  tensorboard:
+    name: "${name}"
+    version: "${now: %Y-%m-%d_%H%M%S}"

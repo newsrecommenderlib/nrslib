@@ -1,0 +1,14 @@
+_target_: pytorch_lightning.Trainer
+
+#gpus: [0]
+accelerator: "auto"
+
+min_epochs: 1
+max_epochs: 50
+check_val_every_n_epoch: 1
+
+# number of validation steps to execute at the beginning of the training
+num_sanity_val_steps: 10
+
+# ckpt path
+resume_from_checkpoint: null

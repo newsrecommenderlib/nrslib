@@ -1,0 +1,34 @@
+# @package _global_
+
+defaults:
+  - override /hydra/sweeper: optuna
+
+# choose metric which will be optimized by Optuna
+# make sure this is the correct name of some metric logged in lightning module!
+optimized_metric: "val_accuracy_epoch"
+
+# here we define Optuna hyperparameter search
+# it optimizes for value returned from function with @hydra.main decorator
+hydra:
+  mode: "MULTIRUN"
+  sweeper:
+    _target_: hydra_plugins.hydra_optuna_sweeper.optuna_sweeper.OptunaSweeper
+
+    # 'minimize' or 'maximize' the objective
+    direction: maximize
+
+    # total number of runs that will be executed
+    n_trials: 10
+
+    # choose Optuna hyperparameter sampler
+    # docs: https://optuna.readthedocs.io/en/stable/reference/samplers.html
+    sampler:
+      _target_: optuna.samplers.TPESampler
+      seed: 1234
+      n_startup_trials: 5 # number of random sampling runs before optimization starts
+
+    # define hyperparameter search space
+    params:
+      model.n_factors: choice(50, 100)
+      #model.lr: choice(0.001, 0.01)
+      datamodule.batch_size: choice(64, 32)

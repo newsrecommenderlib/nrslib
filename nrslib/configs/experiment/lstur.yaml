@@ -1,0 +1,59 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+defaults:
+  - override /datamodule: mind.yaml
+  - override /model: lstur.yaml
+  - override /callbacks: dkn.yaml
+  - override /logger: tensorboard
+  - override /trainer: lstur.yaml
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+# name of the run determines folder name in logs
+name: "lstur"
+
+#seed: 12345
+
+#trainer:
+#  min_epochs: 10
+#  max_epochs: 10
+#  gradient_clip_val: 0.5
+
+# model:
+#   lr: 0.002
+#   net:
+#     lin1_size: 128
+#     lin2_size: 256
+#     lin3_size: 64
+
+datamodule:
+  _target_: nrslib.src.datamodules.mind.datamodule_NAML.MINDDataModuleNAML
+  dataset_attributes:
+    news:
+      - category
+      - subcategory
+      - title
+    record:
+      - user
+      - clicked_news_length
+  num_clicked_news_a_user: 50
+  num_words_title: 20
+  num_words_abstract: 50
+  word_freq_threshold: 1
+  entity_freq_threshold: 2
+  entity_confidence_threshold: 0.5
+  negative_sampling_ratio: 2
+  word_embedding_dim: 300
+  entity_embedding_dim: 100
+
+
+logger:
+  wandb:
+    tags: ["LSTUR", "${name}"]
+  tensorboard:
+    name: "${name}"
+    version: "${now:%Y-%m-%d_%H%M%S}"

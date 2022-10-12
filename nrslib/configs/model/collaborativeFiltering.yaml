@@ -1,0 +1,21 @@
+_target_: nrslib.src.models.collaborativeFiltering.CollaborativeFiltering
+lr: 0.001
+n_factors: 50
+data_dir: ${data_dir}/MIND
+metrics:
+  valid:
+    accuracy:
+      _target_: torchmetrics.Accuracy
+    ndcg5:
+      _target_: torchmetrics.RetrievalNormalizedDCG
+      k: 5
+    auroc:
+      _target_: torchmetrics.AUROC
+  test:
+    accuracy:
+      _target_: torchmetrics.Accuracy
+    ndcg5:
+      _target_: torchmetrics.RetrievalNormalizedDCG
+      k: 5
+    auroc:
+      _target_: torchmetrics.AUROC

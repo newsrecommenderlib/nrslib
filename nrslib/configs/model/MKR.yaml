@@ -1,0 +1,27 @@
+_target_: nrslib.src.models.MKR.MKR
+dim: 16
+l: 3
+h: 1
+l2_weight: 0.000001
+lr_rs: 0.001
+lr_kge: 0.0002
+kge_interval: 5
+use_inner_product: True
+data_dir: ${data_dir}/MIND
+metrics:
+  valid:
+    accuracy:
+      _target_: torchmetrics.Accuracy
+    ndcg5:
+      _target_: torchmetrics.RetrievalNormalizedDCG
+      k: 5
+    auroc:
+      _target_: torchmetrics.AUROC
+  test:
+    accuracy:
+      _target_: torchmetrics.Accuracy
+    ndcg5:
+      _target_: torchmetrics.RetrievalNormalizedDCG
+      k: 5
+    auroc:
+      _target_: torchmetrics.AUROC

@@ -1,0 +1,40 @@
+_target_: nrslib.src.models.LSTUR.LSTUR
+learning_rate: 0.0001
+num_users: 50001
+num_words: 70975
+word_embedding_dim: 300
+num_categories: 275
+num_filters: 300
+window_size: 3
+query_vector_dim: 200
+long_short_term_method: 'ini'
+pretrained_word_embedding_path: '.data/train/pretrained_word_embedding.npy'
+masking_probability: 0.5
+dropout_probability: 0.2
+metrics:
+  valid:
+    accuracy:
+      _target_: torchmetrics.Accuracy
+    ndcg5:
+      _target_: torchmetrics.RetrievalNormalizedDCG
+      k: 5
+    ndcg10:
+      _target_: torchmetrics.RetrievalNormalizedDCG
+      k: 10
+    auroc:
+      _target_: torchmetrics.AUROC
+    mae:
+      _target_: torchmetrics.MeanAbsoluteError
+  test:
+    accuracy:
+      _target_: torchmetrics.Accuracy
+    ndcg5:
+      _target_: torchmetrics.RetrievalNormalizedDCG
+      k: 5
+    ndcg10:
+      _target_: torchmetrics.RetrievalNormalizedDCG
+      k: 10
+    auroc:
+      _target_: torchmetrics.AUROC
+    mae:
+      _target_: torchmetrics.MeanAbsoluteError

@@ -1,0 +1,41 @@
+_target_: nrslib.src.models.DKN.DKN
+learning_rate: 0.0001
+num_filters: 50
+window_sizes: [2, 3, 4]
+num_clicked_news_a_user: 50
+pretrained_word_embedding_path: '.data/train/pretrained_word_embedding.npy'
+pretrained_entity_embedding_path: '.data/train/pretrained_entity_embedding.npy'
+pretrained_context_embedding_path: '.data/train/pretrained_context_embedding.npy'
+query_vector_dim: 200
+num_words: 50506
+word_embedding_dim: 300
+use_context: False
+num_entities: 12958
+entity_embedding_dim: 100
+metrics:
+  valid:
+    accuracy:
+      _target_: torchmetrics.Accuracy
+    ndcg5:
+      _target_: torchmetrics.RetrievalNormalizedDCG
+      k: 5
+    ndcg10:
+      _target_: torchmetrics.RetrievalNormalizedDCG
+      k: 10
+    auroc:
+      _target_: torchmetrics.AUROC
+    mae:
+      _target_: torchmetrics.MeanAbsoluteError
+  test:
+    accuracy:
+      _target_: torchmetrics.Accuracy
+    ndcg5:
+      _target_: torchmetrics.RetrievalNormalizedDCG
+      k: 5
+    ndcg10:
+      _target_: torchmetrics.RetrievalNormalizedDCG
+      k: 10
+    auroc:
+      _target_: torchmetrics.AUROC
+    mae:
+      _target_: torchmetrics.MeanAbsoluteError

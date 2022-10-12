@@ -1,0 +1,26 @@
+model_checkpoint:
+  _target_: pytorch_lightning.callbacks.ModelCheckpoint
+  monitor: "accuracy_epoch" # name of the logged metric which determines when model is improving
+  mode: "max" # "max" means higher metric value is better, can be also "min"
+  save_top_k: 1 # save k best models (determined by above metric)
+  save_last: True # additionaly always save model from last epoch
+  verbose: False
+  dirpath: checkpoints/
+  filename: ${model_name}_epoch_{epoch:03d}   #ToDO: model name ${model_name}
+  auto_insert_metric_name: False
+  every_n_epochs: 2
+
+early_stopping:
+  _target_: pytorch_lightning.callbacks.EarlyStopping
+  monitor: "accuracy_epoch" # name of the logged metric which determines when model is improving
+  mode: "max" # "max" means higher metric value is better, can be also "min"
+  patience: 3 # how many validation epochs of not improving until training stops
+  min_delta: 0 # minimum change in the monitored metric needed to qualify as an improvement
+
+model_summary:
+  _target_: pytorch_lightning.callbacks.RichModelSummary
+  max_depth: -1
+
+# breaks progress bar in console
+#rich_progress_bar:
+#  _target_: pytorch_lightning.callbacks.RichProgressBar

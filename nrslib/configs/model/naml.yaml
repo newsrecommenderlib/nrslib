@@ -1,0 +1,39 @@
+_target_: nrslib.src.models.naml.NAML
+lr: 0.0001
+word_embedding_dim: 300
+dataset_attributes:
+  news:
+    - category
+    - subcategory
+    - title
+    - abstract
+  record: []
+num_filters: 300
+window_size: 3
+query_vector_dim: 200
+dropout_probability: 0.2
+category_embedding_dim: 100
+num_words: 50506
+num_categories: 248
+pretrained_word_embedding: ${data_dir}/MIND/train/pretrained_word_embedding.npy
+metrics:
+  valid:
+    accuracy:
+      _target_: torchmetrics.Accuracy
+    ndcg10:
+      _target_: torchmetrics.RetrievalNormalizedDCG
+      k: 10
+    auroc:
+      _target_: torchmetrics.AUROC
+    mae:
+      _target_: torchmetrics.MeanAbsoluteError
+  test:
+    accuracy:
+      _target_: torchmetrics.Accuracy
+    ndcg10:
+      _target_: torchmetrics.RetrievalNormalizedDCG
+      k: 10
+    auroc:
+      _target_: torchmetrics.AUROC
+    mae:
+      _target_: torchmetrics.MeanAbsoluteError

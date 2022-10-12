@@ -1,0 +1,13 @@
+_target_: nrslib.src.models.BERT.BERT
+
+metrics:
+  accuracy:
+    _target_: torchmetrics.Accuracy
+  ndcg10:
+    _target_: torchmetrics.RetrievalNormalizedDCG
+    k: 10
+  auroc:
+    _target_: torchmetrics.AUROC
+  ndcg5:
+    _target_: torchmetrics.RetrievalNormalizedDCG
+    k: 5
