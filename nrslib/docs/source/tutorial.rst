@@ -1,6 +1,13 @@
 Quick start
 =====================================================
 
+Installation
+--------------
+
+Install with pip::
+
+    pip install nrslib
+
 Main Technologies
 ------------------
 Familarity with the follow tools are recommended to use this library.

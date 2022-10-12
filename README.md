@@ -4,6 +4,14 @@ This library is a modular, end-to-end pipeline for news recommender systems.
 
 ## Quick Start
 
+### Installation
+
+Install with pip
+
+```shell
+pip install nrslib
+```
+
 ### Main Technologies
 
 Familarity with the follow tools are recommended to use this library.
