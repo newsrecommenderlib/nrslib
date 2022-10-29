@@ -62,3 +62,17 @@ Then adjust the configurations to use the new class
 ```yaml
 _target_: path.to.class.ImprovedNAML
 ```
+
+### Algrothims
+
+There are multuiple algrothims implemented in the library and ready to work with the MIND dataset. The algrothims supported are: 
+- Baselines Models  
+    - Neural Collaborative Filtering
+    - Content Based (BERT)
+- Advanced Models
+    - MKR
+    - RippleNet
+    - DKN
+    - LSTUR
+    - NAML
+    - NRMS
