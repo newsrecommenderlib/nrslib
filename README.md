@@ -72,7 +72,7 @@ There are multuiple algrothims implemented in the library and ready to work with
 - Advanced Models
     - MKR
     - RippleNet
-    - DKN
+    - DKN 
     - LSTUR
     - NAML
     - NRMS
